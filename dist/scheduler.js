@@ -2161,7 +2161,7 @@ TimelineGrid = (function(superClass) {
         isSuperRow = formats.length > 1 && row < formats.length - 1;
         newCell = null;
         if (isSuperRow) {
-          text = date.format(format);
+          text = typeof format === 'function' ? format(j, date) : date.format(format);
           if (!leadingCell || leadingCell.text !== text) {
             newCell = {
               text: text,
@@ -2172,7 +2172,7 @@ TimelineGrid = (function(superClass) {
           }
         } else {
           if (!leadingCell || isInt(divideRangeByDuration(this.start, date, labelInterval))) {
-            text = date.format(format);
+            text = typeof format === 'function' ? format(j, date) : date.format(format);
             newCell = {
               text: text,
               colspan: 1
